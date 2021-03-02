@@ -1,5 +1,21 @@
+// Copyright (c) 2021 WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+//
+// WSO2 Inc. licenses this file to you under the Apache License,
+// Version 2.0 (the "License"); you may not use this file except
+// in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+import ballerina/jballerina.java;
 import ballerina/io;
-import ballerina/os;
 import ballerina/regex;
 import ballerina/test;
 
@@ -52,9 +68,8 @@ configurable string temp_dir_path = ?;
 
 @test:Config {}
 public function testPrintDebug() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: CONFIG_DEBUG_FILE}, (), "run",
-    PRINT_DEBUG_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: CONFIG_DEBUG_FILE}, (), "run", PRINT_DEBUG_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -69,8 +84,8 @@ public function testPrintDebug() {
 
 @test:Config {}
 public function testPrintError() {
-    os:Process|error execResult = os:exec(bal_exec_path, {}, (), "run", PRINT_ERROR_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {}, (), "run", PRINT_ERROR_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -93,8 +108,8 @@ public function testPrintError() {
 
 @test:Config {}
 public function testPrintInfo() {
-    os:Process|error execResult = os:exec(bal_exec_path, {}, (), "run", PRINT_INFO_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {}, (), "run", PRINT_INFO_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -109,8 +124,8 @@ public function testPrintInfo() {
 
 @test:Config {}
 public function testPrintWarn() {
-    os:Process|error execResult = os:exec(bal_exec_path, {}, (), "run", PRINT_WARN_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {}, (), "run", PRINT_WARN_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -125,8 +140,8 @@ public function testPrintWarn() {
 
 @test:Config {}
 public function testErrorLevel() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: CONFIG_ERROR_FILE}, (), "run", LOG_LEVEL_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: CONFIG_ERROR_FILE}, (), "run", LOG_LEVEL_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -139,8 +154,8 @@ public function testErrorLevel() {
 
 @test:Config {}
 public function testWarnLevel() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: CONFIG_WARN_FILE}, (), "run", LOG_LEVEL_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: CONFIG_WARN_FILE}, (), "run", LOG_LEVEL_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -154,8 +169,8 @@ public function testWarnLevel() {
 
 @test:Config {}
 public function testInfoLevel() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: CONFIG_INFO_FILE}, (), "run", LOG_LEVEL_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: CONFIG_INFO_FILE}, (), "run", LOG_LEVEL_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -170,8 +185,8 @@ public function testInfoLevel() {
 
 @test:Config {}
 public function testDebugLevel() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: CONFIG_DEBUG_FILE}, (), "run", LOG_LEVEL_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: CONFIG_DEBUG_FILE}, (), "run", LOG_LEVEL_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -187,9 +202,9 @@ public function testDebugLevel() {
 
 @test:Config {}
 public function testProjectWithoutLogLevel() {
-    os:Process|error execResult = os:exec(bal_exec_path, {}, (), "run", temp_dir_path
+    Process|error execResult = exec(bal_exec_path, {}, (), "run", temp_dir_path
     + "/log-project");
-    os:Process result = checkpanic execResult;
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -210,9 +225,9 @@ public function testProjectWithoutLogLevel() {
 
 @test:Config {}
 public function testProjectWithGlobalLogLevel() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: PROJECT_CONFIG_GLOBAL_LEVEL}, (),
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: PROJECT_CONFIG_GLOBAL_LEVEL}, (),
     "run", temp_dir_path + "/log-project");
-    os:Process result = checkpanic execResult;
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -230,9 +245,9 @@ public function testProjectWithGlobalLogLevel() {
 
 @test:Config {}
 public function testProjectWithGlobalAndDefualtPackageLogLevel() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: PROJECT_CONFIG_GLOBAL_AND_DEFAULT_PACKAGE_LEVEL},
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: PROJECT_CONFIG_GLOBAL_AND_DEFAULT_PACKAGE_LEVEL},
      (), "run", temp_dir_path + "/log-project");
-    os:Process result = checkpanic execResult;
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -251,9 +266,9 @@ public function testProjectWithGlobalAndDefualtPackageLogLevel() {
 
 @test:Config {}
 public function testProjectWithGlobalAndModuleLogLevels() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: PROJECT_CONFIG_GLOBAL_AND_MODULE_LEVEL}, (),
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: PROJECT_CONFIG_GLOBAL_AND_MODULE_LEVEL}, (),
     "run", temp_dir_path + "/log-project");
-    os:Process result = checkpanic execResult;
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -272,8 +287,8 @@ public function testProjectWithGlobalAndModuleLogLevels() {
 
 @test:Config {}
 public function testJsonFormat() {
-    os:Process|error execResult = os:exec(bal_exec_path, {BALCONFIGFILE: CONFIG_FORMAT_JSON}, (), "run", FORMAT_JSON_FILE);
-    os:Process result = checkpanic execResult;
+    Process|error execResult = exec(bal_exec_path, {BALCONFIGFILE: CONFIG_FORMAT_JSON}, (), "run", FORMAT_JSON_FILE);
+    Process result = checkpanic execResult;
     int waitForExit = checkpanic result.waitForExit();
     int exitCode = checkpanic result.exitCode();
     io:ReadableByteChannel readableResult = result.stderr();
@@ -300,3 +315,9 @@ isolated function validateLog(string log, string level, string package, string m
     test:assertTrue(log.includes(message));
     test:assertTrue(log.includes(keyValues));
 }
+
+function exec(@untainted string command, @untainted map<string> env = {},
+                     @untainted string? dir = (), @untainted string... args) returns Process|error = @java:Method {
+    name: "exec",
+    'class: "org.ballerinalang.stdlib.log.testutils.nativeimpl.Exec"
+} external;
